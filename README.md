@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Teach-the-AI Student
 
-## Getting Started
+A voice-first consumer MVP where people learn by teaching an AI student out loud.
 
-First, run the development server:
+## What it does
+
+- lets the user choose a topic, starting student level, and interruption aggressiveness
+- opens a browser-based voice session with an AI student over OpenAI Realtime WebRTC
+- keeps a structured model of what the student thinks has been taught, what remains unclear, and how strong the teacher seems
+- generates a lightweight reflection summary after each session
+- stores sessions locally in IndexedDB on the current device
+
+## Stack
+
+- Next.js App Router
+- React + TypeScript
+- Tailwind CSS
+- Zustand for live session state
+- `@openai/agents` realtime session management
+- OpenAI Responses API for post-session summaries
+- IndexedDB via `idb`
+- Vitest for core domain tests
+
+## Local setup
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Create a local env file:
+
+```bash
+cp .env.example .env.local
+```
+
+3. Add your OpenAI API key to `.env.local`.
+
+4. Start the app:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Important notes
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Live voice and summary generation require `OPENAI_API_KEY`.
+- Sessions are saved locally in the browser, not in a backend database.
+- The MVP targets guided realtime voice, so interruptions happen at pause boundaries rather than full overlapping duplex speech.
 
-## Learn More
+## Scripts
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `npm run dev`
+- `npm run build`
+- `npm run lint`
+- `npm run test`
+- `npm run test:watch`
